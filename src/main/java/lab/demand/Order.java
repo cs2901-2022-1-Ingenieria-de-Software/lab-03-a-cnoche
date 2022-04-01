@@ -1,7 +1,7 @@
 package lab.demand;
 
 public class Order {
-
+    
     private String country;
     private Long quantity;
     

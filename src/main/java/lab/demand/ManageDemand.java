@@ -1,5 +1,5 @@
 package lab.demand;
-
+import java.util.HashMap;
 import java.util.List;
 
 public class ManageDemand {
@@ -11,24 +11,20 @@ public class ManageDemand {
     }
 
     public double calculateTotal(List<Order> orders){
-        // Calculate Taxes
-        double taxes = 0.0;
-        for (Order order : orders) {
-            double tax = this.tax.calculateTax(order.getCountry());
-            taxes += tax;
-        }
 
-        // Calculate Total
+        double taxes = 0.0;
         double quantities = 0.0;
         for (Order order : orders) {
+            double tax = this.tax.calculateTax(order.getCountry());
             double temp = order.getQuantity();
             quantities += temp;
+            taxes += tax;
         }
 
         return quantities * taxes;
     }
 
-    public double calculateTotalForWithAdditionalByCountry(List<Order> orders, double defaultAdditionalColombia, double defaultAdditionalPeru, double defaultAdditionalBrazil){
+    public double calculateTotalForWithAdditionalByCountry(List<Order> orders, Tax tax){
         // Calculate additionals by country
         double taxes = 0.0;
         for (Order order : orders) {
@@ -41,14 +37,6 @@ public class ManageDemand {
                 taxes += defaultAdditionalColombia;
             }
         }
-
-        // Calculate Total
-        double quantities = 0.0;
-        for (Order order : orders) {
-            double temp = order.getQuantity();
-            quantities += temp;
-        }
-
         return quantities * taxes;
     }
 
