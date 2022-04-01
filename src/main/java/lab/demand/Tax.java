@@ -5,9 +5,12 @@ public class Tax {
     
     HashMap<String, Double> cityTax = new HashMap<String, Double>();
     
-    public Double addTax(String country, Double tax){
+    public void addTax(String country, Double tax){
+        Double value = cityTax.get(country);
+        if (value != null){
+            return;
+        }
         cityTax.put(country,tax);
-        return value;
     }
 
     public Double calculateTax(String country) {
